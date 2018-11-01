@@ -1,6 +1,6 @@
 package edu.austral.starship.base.framework;
 
-import edu.austral.starship.CustomGameFramework;
+import edu.austral.starship.base.controllers.PrincipalController;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GameManager extends PApplet {
-    private final GameFramework gameFramework = new CustomGameFramework();
+    private final GameFramework gameFramework = new PrincipalController();
     private final Set<Integer> keySet = new HashSet<>();
 
     public void settings() {
@@ -29,7 +29,7 @@ public class GameManager extends PApplet {
     }
 
     public void keyReleased(KeyEvent event) {
-        keySet.add(event.getKeyCode());
+        keySet.remove(event.getKeyCode());
 
         gameFramework.keyReleased(event);
     }
