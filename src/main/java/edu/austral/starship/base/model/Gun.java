@@ -1,19 +1,35 @@
 package edu.austral.starship.base.model;
 
-import java.util.List;
-
 /**
  * @author Florencia Vimberg
  */
 public class Gun {
     private int gunModel;
-    private List<Bullet> bullets;
+    private int amtBullets;
+
+    public Gun() {
+        amtBullets = 20;
+    }
 
     public boolean hasBullets(){
-        return !bullets.isEmpty();
+        return amtBullets > 0;
     }
 
     public void shoot(){
 
     }
+
+    public void deleteBullet(){
+        amtBullets -= 1;
+    }
+
+    public void addBullet(int bullets){
+        amtBullets += bullets;
+    }
+
+    public int getAmtBullets() {
+        return amtBullets;
+    }
+
+
 }

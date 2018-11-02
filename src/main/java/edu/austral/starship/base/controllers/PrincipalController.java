@@ -4,22 +4,19 @@ import edu.austral.starship.base.framework.GameFramework;
 import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
 import edu.austral.starship.base.model.*;
-import edu.austral.starship.base.vector.Vector2;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.event.KeyEvent;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public class PrincipalController extends  ObservableKeyEvent implements GameFramework {
     private HashMap<String, PImage> images;
     private Model model = new Model();
     private Visitor visitor = new Visitor();
-    private static Random random =  new Random();
-    private Player player = new Player("Flor");
+    private Player player1 = new Player("Player 1");
     private int counter = 300;
 
     public HashMap loadImages(ImageLoader imageLoader){
@@ -37,24 +34,25 @@ public class PrincipalController extends  ObservableKeyEvent implements GameFram
         windowsSettings
             .setSize(600, 600)
             .enableHighPixelDensity();
-        PlayerController playerController = new PlayerController(player, model);
-        addObserver(playerController);
-        model.addObject(player.getSpaceship());
+        PlayerController playerController1 = new PlayerController(player1, model);
+        addObserver(playerController1);
+        model.addObject(player1.getSpaceship());
         model.createAsteroid();
     }
 
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
-        graphics.background(255,255,255);
-        if (player.getAmtLives() == 0){
+    graphics.background(255,255,255);
+        if (player1.getAmtLives() == 0 || player1.getSpaceship().getGun().getAmtBullets() == 0){
             gameOver(graphics);
         } else {
             for (Integer event: keySet
                     ) {
                 notifyAll(event);
             }
-            player.drawHearts(visitor, graphics, images);
+            player1.drawHearts(graphics, images);
+            player1.drawBullets(graphics, images);
             counter = model.nextMove(counter, timeSinceLastDraw);
             List<GameObject> objects = model.getObjects();
             for (GameObject object : objects

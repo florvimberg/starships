@@ -26,6 +26,12 @@ public class Visitor {
         graphics.image(images.get("bullet"), bullet.getPosition().getX(), bullet.getPosition().getY(), bullet.getSize(),bullet.getSize());
     }
 
+    public void drawBulletPackage(BulletPackage bulletPackage, PGraphics graphics, HashMap<String, PImage> images){
+        drawLimits(bulletPackage.getShape(), graphics);
+        graphics.text(bulletPackage.getAmtBullets(), bulletPackage.getPosition().getX(), bulletPackage.getPosition().getY());
+        graphics.image(images.get("bullet"), bulletPackage.getPosition().getX(), bulletPackage.getPosition().getY(), bulletPackage.getSize(), bulletPackage.getSize());
+    }
+
 
     void drawLimits(Shape shape, PGraphics graphics){
         float x = (float) shape.getBounds2D().getX();

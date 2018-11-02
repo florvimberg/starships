@@ -27,7 +27,7 @@ public class Bullet extends GameObject {
 
     @Override
     public void move() {
-        setPosition(new Vector2(getPosition().getX(), getPosition().getY() -1));
+        setPosition(new Vector2(getPosition().getX(), getPosition().getY() -3));
     }
 
     @Override
@@ -44,6 +44,9 @@ public class Bullet extends GameObject {
     public void collisionedWith(GameObject gameObject) {
         gameObject.collisionedWithBullet(this);
     }
+
+    @Override
+    public void collisionedWithBulletPackage(BulletPackage bulletPackage) { }
 
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {

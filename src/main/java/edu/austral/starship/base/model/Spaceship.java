@@ -25,19 +25,19 @@ public class Spaceship extends GameObject implements ObservableSpaceship {
     }
 
     public void moveLeft(){
-        setPosition(new Vector2(getPosition().getX() -1, getPosition().getY()));
+        setPosition(new Vector2(getPosition().getX() -2, getPosition().getY()));
     }
 
     public void moveRight(){
-        setPosition(new Vector2(getPosition().getX() +1, getPosition().getY()));
+        setPosition(new Vector2(getPosition().getX() +2, getPosition().getY()));
     }
 
     public void moveUp(){
-        setPosition(new Vector2(getPosition().getX(), getPosition().getY()-1));
+        setPosition(new Vector2(getPosition().getX(), getPosition().getY()-2));
     }
 
     public void moveDown(){
-        setPosition(new Vector2(getPosition().getX(), getPosition().getY()+1));
+        setPosition(new Vector2(getPosition().getX(), getPosition().getY()+2));
     }
 
     public void shoot(){
@@ -83,6 +83,11 @@ public class Spaceship extends GameObject implements ObservableSpaceship {
     }
 
     @Override
+    public void collisionedWithBulletPackage(BulletPackage bulletPackage) {
+        this.getGun().addBullet(bulletPackage.getAmtBullets());
+    }
+
+    @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
         notifyCrash();
     }
@@ -101,5 +106,10 @@ public class Spaceship extends GameObject implements ObservableSpaceship {
                 ) {
             spaceshipObserver.onCrash();
         }
+        gun.addBullet(10);
+    }
+
+    public Gun getGun() {
+        return gun;
     }
 }

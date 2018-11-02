@@ -54,6 +54,8 @@ public abstract class GameObject implements Collisionable<GameObject> {
         this.health = health;
     }
 
+    public abstract void collisionedWithBulletPackage(BulletPackage bulletPackage);
+
     public abstract void collisionedWithAsteroid(Asteroid asteroid);
 
     public abstract void collisionedWithSpaceship(Spaceship spaceship);

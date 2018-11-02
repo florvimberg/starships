@@ -27,7 +27,7 @@ public class Asteroid extends GameObject {
     public void move(){
         Random random = new Random();
         this.setShape(new Rectangle(((int) this.getPosition().getX()) + 1 , ((int) this.getPosition().getY()) + 1, 35,35));
-        setPosition(getPosition().add(new Vector2(random.nextInt(2),random.nextInt(2))));
+        setPosition(getPosition().add(new Vector2(random.nextInt(3),random.nextInt(3))));
     }
 
     @Override
@@ -49,6 +49,11 @@ public class Asteroid extends GameObject {
     @Override
     public void collisionedWith(GameObject gameObject) {
         gameObject.collisionedWithAsteroid(this);
+    }
+
+    @Override
+    public void collisionedWithBulletPackage(BulletPackage bulletPackage) {
+
     }
 
     @Override
