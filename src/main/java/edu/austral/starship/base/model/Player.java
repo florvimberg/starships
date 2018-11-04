@@ -1,5 +1,6 @@
 package edu.austral.starship.base.model;
 
+import edu.austral.starship.base.controllers.BulletObserver;
 import edu.austral.starship.base.controllers.SpaceshipObserver;
 import edu.austral.starship.base.vector.Vector2;
 import processing.core.PGraphics;
@@ -10,15 +11,15 @@ import java.util.HashMap;
 /**
  * @author Florencia Vimberg
  */
-public class Player implements SpaceshipObserver {
+public class Player implements SpaceshipObserver, BulletObserver {
     private Spaceship spaceship;
     private int amtLives;
     private String name;
-    private float points;
+    private int points;
 
-    public Player(String name) {
+    public Player(String name, Vector2 direction, Vector2 position) {
         this.name = name;
-        spaceship = new Spaceship(new Vector2(0,0), new Vector2(270,550));
+        spaceship = new Spaceship(direction, position);
         spaceship.addObserver(this);
         amtLives = 3;
         points = 0;
@@ -45,10 +46,8 @@ public class Player implements SpaceshipObserver {
         amtLives -=1;
     }
 
-    public void drawHearts(PGraphics graphics, HashMap<String,PImage> images) {
-        int x = 0;
-        int y = 15;
-        graphics.text(name, 5,15);
+    public void drawHearts(PGraphics graphics, HashMap<String,PImage> images, int x, int y) {
+        graphics.text(name, x,y);
         graphics.fill(0,0,0);
         graphics.textSize(14);
         for (int i = 0; i < this.getAmtLives(); i++) {
@@ -57,12 +56,21 @@ public class Player implements SpaceshipObserver {
         }
     }
 
-    public void drawBullets(PGraphics graphics, HashMap<String, PImage> images){
-        int x = 65;
-        int y = 15;
+    public void drawBullets(PGraphics graphics, HashMap<String, PImage> images, int x, int y){
         graphics.text(spaceship.getGun().getAmtBullets(), x, y);
         y = 20;
         graphics.image(images.get("bullet"), x, y , 15,15);
 
+    }
+
+    public void drawPoints(PGraphics graphics, HashMap<String, PImage> images, int x, int y){
+        graphics.text("points:", x, y);
+        x += 50;
+        graphics.text(points, x, y);
+    }
+
+    @Override
+    public void onBulletImpact() {
+        points += 100;
     }
 }

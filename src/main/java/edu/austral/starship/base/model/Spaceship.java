@@ -40,12 +40,6 @@ public class Spaceship extends GameObject implements ObservableSpaceship {
         setPosition(new Vector2(getPosition().getX(), getPosition().getY()+2));
     }
 
-    public void shoot(){
-        if(gun.hasBullets()){
-            gun.shoot();
-        }
-    }
-
     public void addObserver(SpaceshipObserver spaceshipObserver){
         observers.add(spaceshipObserver);
     }

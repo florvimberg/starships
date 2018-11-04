@@ -54,8 +54,8 @@ public class Model {
         Random random = new Random();
         int amtBullets = random.nextInt(10);
         if(amtBullets > 5){
-            BulletPackage bulletPackage = new BulletPackage(15, new Vector2(random.nextInt(600),
-                    random.nextInt(600)), new Vector2(random.nextInt(600), random.nextInt(600)), amtBullets);
+            BulletPackage bulletPackage = new BulletPackage(15, new Vector2(random.nextInt(500),
+                    random.nextInt(500)), new Vector2(random.nextInt(500), random.nextInt(500)), amtBullets);
             addObject(bulletPackage);
         }
     }
@@ -65,6 +65,7 @@ public class Model {
         Bullet bullet = new Bullet(size, player.getSpaceship().getDirection(),
                 new Vector2(player.getSpaceship().getPosition().getX() + 5, player.getSpaceship().getPosition().getY() - 40));
         gun.deleteBullet();
+        bullet.addObserver(player);
         addObject(bullet);
     }
 

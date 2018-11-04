@@ -1,22 +1,27 @@
 package edu.austral.starship.base.model;
 
-import edu.austral.starship.base.collision.Collisionable;
+import edu.austral.starship.base.controllers.BulletObserver;
+import edu.austral.starship.base.controllers.ObservableBullet;
 import edu.austral.starship.base.vector.Vector2;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Florencia Vimberg
  */
-public class Bullet extends GameObject {
+public class Bullet extends GameObject implements ObservableBullet {
     private int size;
+    private List<BulletObserver> observers;
 
     protected Bullet(int size, Vector2 direction, Vector2 position) {
         super(direction, position, size, size);
         this.size =  size;
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -51,6 +56,7 @@ public class Bullet extends GameObject {
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
         this.setHealth(0);
+        notifyImpact();
     }
 
     @Override
@@ -61,5 +67,17 @@ public class Bullet extends GameObject {
     @Override
     public void collisionedWithBullet(Bullet bullet) {
 
+    }
+
+    public void addObserver(BulletObserver bulletObserver){
+        observers.add(bulletObserver);
+    }
+
+    @Override
+    public void notifyImpact() {
+        for (BulletObserver bulletObserver: observers
+                ) {
+            bulletObserver.onBulletImpact();
+        }
     }
 }
