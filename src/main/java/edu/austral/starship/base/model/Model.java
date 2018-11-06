@@ -12,25 +12,16 @@ import java.util.Random;
  */
 public class Model {
     private List<GameObject> objects;
-    private Map map;
     private CollisionEngine collisionEngine;
-    private List<Player> players;
-//    private Visitor visitor;
 
 
     public Model() {
         this.objects = new ArrayList<>();
-        this.map = new Map();
         this.collisionEngine = new CollisionEngine();
-        players = new ArrayList<>();
     }
 
     public void addObject(GameObject object) {
         objects.add(object);
-    }
-
-    public void addPlayer(Player player) {
-        players.add(player);
     }
 
     public List<GameObject> getObjects() {

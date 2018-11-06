@@ -19,9 +19,6 @@ public class PrincipalController extends  ObservableKeyEvent implements GameFram
     private HashMap<String, PImage> images;
     private Model model = new Model();
     private Visitor visitor = new Visitor();
-    private Player player1 = new Player("Player 1", new Vector2(0,0), new Vector2(300, 500));
-    private Player player2 = new Player("Player 2", new Vector2(0,0), new Vector2(200,500));
-//    private Player player3 = new Player("Player 3", new Vector2(0,0), new Vector2(400,500));
     private int counter = 300;
     private List<Player> players = new ArrayList<>();
     private List<List<Integer>> keyActions =  new ArrayList<>();
@@ -37,6 +34,9 @@ public class PrincipalController extends  ObservableKeyEvent implements GameFram
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
+        Player player1 = new Player("Player 1", new Vector2(0,0), new Vector2(300, 500));
+        Player player2 = new Player("Player 2", new Vector2(0,0), new Vector2(200,500));
+//        Player player3 = new Player("Player 3", new Vector2(0,0), new Vector2(400,500));
         images = loadImages(imageLoader);
         windowsSettings
             .setSize(600, 600)

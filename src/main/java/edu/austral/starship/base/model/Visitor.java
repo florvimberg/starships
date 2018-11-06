@@ -3,14 +3,12 @@ package edu.austral.starship.base.model;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-import java.awt.*;
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * @author Florencia Vimberg
  */
-public class Visitor {
+public class Visitor implements IVisitor {
     public void drawSpaceship(Spaceship spaceship, PGraphics graphics, HashMap<String, PImage> images){
         graphics.image(images.get("spaceship"), spaceship.getPosition().getX(), spaceship.getPosition().getY(), 40,40);
     }

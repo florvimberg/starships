@@ -14,7 +14,6 @@ import java.util.HashMap;
 public abstract class GameObject implements Collisionable<GameObject> {
     private float health;
     private Vector2 position;
-    private int speed;
     private Vector2 direction;
     private Shape shape;
 
